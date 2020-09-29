@@ -3,22 +3,32 @@ import { useState, useEffect } from "react";
 const useKeyPressed = (callback) => {
   const [keyPressed, setKeyPressed] = useState();
   const [spacePressed, setSpacePressed] = useState(false);
+  const [backspacePressed, setBackspacePressed] = useState(false);
+
   useEffect(() => {
     const keyPressedDown = ({ key, keyCode }) => {
-      if (keyPressed !== key && key.length === 1) {
-        setSpacePressed(false);
-        setKeyPressed(key);
-        callback && callback(key);
+      //   console.log("render");
+      //   console.log(key, keyCode);
+      if (keyPressed !== key && keyCode === 8) {
+        setBackspacePressed(true);
       }
       if (keyPressed !== key && key === " ") {
-        console.log("Hello");
+        //   console.log("Hello");
         setSpacePressed(true);
+      }
+
+      if (keyPressed !== key && key.length === 1) {
+        setSpacePressed(false);
+        setBackspacePressed(false);
+        setKeyPressed(key);
+        callback && callback(key);
       }
     };
 
     const keyPressedUp = () => {
       setKeyPressed(null);
       setSpacePressed(false);
+      setBackspacePressed(false);
     };
 
     window.addEventListener("keydown", keyPressedDown);
@@ -30,7 +40,7 @@ const useKeyPressed = (callback) => {
     };
   });
 
-  return [keyPressed, spacePressed];
+  return [keyPressed, spacePressed, backspacePressed];
 };
 
 export default useKeyPressed;
