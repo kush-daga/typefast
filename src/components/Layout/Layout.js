@@ -111,7 +111,7 @@ export default function Layout({
         <input value={wordWritten}></input>
         <Timer>{timeRemaining}</Timer>
         {timeOver ? <p>WPM - {wpm}</p> : ""}
-        {timeOver ? <p>Accuracy - {accuracy}%</p> : ""}
+        {timeOver ? <p>Accuracy - {accuracy.toFixed(2)}%</p> : ""}
       </Input>
     </Container>
   );
