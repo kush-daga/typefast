@@ -7,9 +7,6 @@ export default function LayoutIndex({ words }) {
   const [batch, setBatch] = useState(0);
   const [currentWords, setCurrentWords] = useState([]);
   const [timeRemaining, setTimeRemaining] = useState(60);
-  const [startTime, setStartTime] = useState();
-  const [wpm, setWpm] = useState(0);
-  const currentTime = () => new Date().getTime();
   const [keyPressed, spacePressed, backspacePressed] = useKeyPressed();
   const [firstTime, setFirstTime] = useState(1);
 
